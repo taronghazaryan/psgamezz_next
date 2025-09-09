@@ -6,30 +6,28 @@ import { useBasket } from "../context/BasketContext";
 const BasketItem = ({ item, index }) => {
 	const { toggleItemCheck, removeFromBasket, changeQuantity } = useBasket();
 
-	const imgSrc = item.main_image_url
-		? item.main_image_url
-		: item.img;
+	const imgSrc = item.main_image_url ?? item.img;
 	const price = item.price ?? 0;
 	const quantity = item.quantity ?? 1;
 	const totalPrice = price * quantity;
 
 	return (
 		<div className="px-4">
-        	<div className="w-full max-w-[1400px] mx-auto">
-				<div
-					className="flex items-center gap-4 mt-8"
-				>
-					{/* чекбокс */}
+			<div className="w-full max-w-[1400px] mx-auto">
+				<div className="flex items-center gap-4 mt-8">
+
+					{/* Чекбокс */}
 					<input
 						type="checkbox"
 						checked={item.checked || false}
 						onChange={() => toggleItemCheck(index)}
-						className="h-[22px] w-[22px] max-[900px]:absolute max-[900px]:top-3 max-[900px]:left-3 accent-primary"
+						className="h-[22px] w-[22px] accent-primary"
 					/>
 
-					{/* картинка + инфо */}
-					<div className="flex items-start gap-4 w-full max-[900px]:mt-6">
-						<div className="relative w-[120px] h-[120px] flex-shrink-0">
+					{/* Картинка + описание */}
+					<div className="flex flex-col sm:flex-row items-start gap-4 w-full">
+						{/* Картинка */}
+						<div className="relative xl:w-[120px] xl:h-[120px] w-[60px] h-[60px] flex-shrink-0">
 							<Image
 								src={imgSrc}
 								alt={item.title || "Товар"}
@@ -40,40 +38,41 @@ const BasketItem = ({ item, index }) => {
 							/>
 						</div>
 
+						{/* Описание */}
 						<div className="flex flex-col justify-between w-full gap-2">
-							<p className="font-bold text-[#202562] text-[20px] max-[600px]:text-[16px]">
+							<p className="font-bold text-[#202562] text-[12px] sm:text-[16px]">
 								{item.title}
 							</p>
 
-							{/* количество */}
-							<div className="flex items-center gap-3 text-black">
-								<button
-									onClick={() => changeQuantity(index, quantity - 1)}
-									className="bg-gray-200 px-4 py-2 rounded-lg text-lg font-bold active:scale-95"
-								>
-									-
-								</button>
-								<span className="text-lg font-semibold">{quantity}</span>
-								<button
-									onClick={() => changeQuantity(index, quantity + 1)}
-									className="bg-gray-200 px-4 py-2 rounded-lg text-lg font-bold active:scale-95"
-								>
-									+
-								</button>
-							</div>
+							{/* Мобильная адаптация: количество и цена снизу */}
+							<div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-2 sm:mt-0">
+								<div className="flex items-center gap-3">
+									<button
+										onClick={() => changeQuantity(index, quantity - 1)}
+										className="bg-gray-200 px-4 py-2 text-primary rounded-lg text-lg font-bold active:scale-95"
+									>
+										-
+									</button>
+									<span className="text-lg text-primary font-semibold">{quantity}</span>
+									<button
+										onClick={() => changeQuantity(index, quantity + 1)}
+										className="bg-gray-200 px-4 py-2 text-primary rounded-lg text-lg font-bold active:scale-95"
+									>
+										+
+									</button>
+								</div>
 
-							<p className="font-bold text-[#202562] text-[20px] max-[600px]:text-[16px]">
-								{totalPrice}₽
-							</p>
+								<p className="font-bold text-[#202562] text-[20px] max-[600px]:text-[16px] mt-2 sm:mt-0">
+									{totalPrice}₽
+								</p>
+							</div>
 						</div>
 					</div>
 
-					{/* кнопка удалить */}
+					{/* Кнопка удалить */}
 					<button
 						onClick={() => removeFromBasket(index)}
-						className="text-red-600 font-semibold mt-3 
-							max-[900px]:w-full max-[900px]:text-center max-[900px]:py-2 
-							max-[900px]:bg-red-100 max-[900px]:rounded-lg hover:bg-red-200"
+						className="text-red-600 font-semibold mt-3 max-[900px]:w-full max-[900px]:text-center max-[900px]:py-2 max-[900px]:bg-red-100 max-[900px]:rounded-lg hover:bg-red-200"
 					>
 						Удалить
 					</button>

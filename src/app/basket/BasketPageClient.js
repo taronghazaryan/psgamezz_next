@@ -70,7 +70,7 @@ const BasketPageClient = () => {
                     type="checkbox"
                     checked={allChecked}
                     onChange={(e) => toggleAll(e.target.checked)}
-                    className="h-[18px] w-[18px]"
+						        className="h-[22px] w-[22px] accent-primary"
                   />
                   <label className="ms-2 font-bold text-[#202562] text-[20px] max-[900px]:text-[18px] max-[600px]:text-[12px]">
                     Выбрать все

@@ -56,7 +56,6 @@ export async function generateMetadata({ params }) {
   }
 
   const game = await response.json();
-  console.log("GAME",game.results[0]);
 
   return {
     title: game.results[0].title || "Магазин игр",

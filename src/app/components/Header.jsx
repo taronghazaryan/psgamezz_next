@@ -210,53 +210,53 @@ const Header = () => {
         </div>
 
         {/* поиск — мобильный */}
-{mobileSearchOpen && (
-  <div className="absolute top-full left-0 w-full px-4 py-2 bg-[#282E79] md:hidden z-50">
-     <input
-      type="text"
-      value={query}
-      onChange={(e) => setQuery(e.target.value)}
-      placeholder="Поиск..."
-      className="w-full pr-10 pl-4 py-2 bg-[#202562] text-white rounded-[12px] focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
-    {query && (
-      <div className="absolute top-full left-0 w-full bg-[#202562] rounded-md shadow-lg mt-1 max-h-[250px] overflow-y-auto z-50">
-        {loading ? (
-          <p className="p-2 text-gray-400">Загрузка...</p>
-        ) : results.length > 0 ? (
-          results.map((game) => (
-            <Link
-              key={game.id}
-              href={`/games/${game.slug}`}
-              className="flex items-center gap-3 p-2 hover:bg-[#2f368a] transition rounded-lg"
-              onClick={() => handleSelectGame(game)}
-            >
-              <Image
-                src={game.main_image_url}
-                alt={game.title}
-                width={40}
-                height={56}
-                className="w-10 h-14 object-cover rounded-md flex-shrink-0"
-              />
-              <div className="flex flex-col">
-                <p className="font-medium text-sm">{game.title}</p>
-                <p className="text-xs text-gray-300">
-                  от{" "}
-                  {game.prices?.without_activation?.[0]?.PS4 ||
-                    game.prices?.without_activation?.[0]?.PS5 ||
-                    "—"}{" "}
-                  ₽
-                </p>
+        {mobileSearchOpen && (
+          <div className="absolute top-full left-0 w-full px-4 py-2  md:hidden z-50">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Поиск..."
+              className="w-full pr-10 pl-4 py-2 bg-[#202562] text-white rounded-[12px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {query && (
+              <div className="absolute top-full left-0 w-full bg-[#202562] rounded-md shadow-lg mt-1 max-h-[250px] overflow-y-auto z-50">
+                {loading ? (
+                  <p className="p-2 text-gray-400">Загрузка...</p>
+                ) : results.length > 0 ? (
+                  results.map((game) => (
+                    <Link
+                      key={game.id}
+                      href={`/games/${game.slug}`}
+                      className="flex items-center gap-3 p-2 hover:bg-[#2f368a] transition rounded-lg"
+                      onClick={() => handleSelectGame(game)}
+                    >
+                      <Image
+                        src={game.main_image_url}
+                        alt={game.title}
+                        width={40}
+                        height={56}
+                        className="w-10 h-14 object-cover rounded-md flex-shrink-0"
+                      />
+                      <div className="flex flex-col">
+                        <p className="font-medium text-sm">{game.title}</p>
+                        <p className="text-xs text-gray-300">
+                          от{" "}
+                          {game.prices?.without_activation?.[0]?.PS4 ||
+                            game.prices?.without_activation?.[0]?.PS5 ||
+                            "—"}{" "}
+                          ₽
+                        </p>
+                      </div>
+                    </Link>
+                  ))
+                ) : (
+                  <p className="p-2 text-gray-400">Ничего не найдено</p>
+                )}
               </div>
-            </Link>
-          ))
-        ) : (
-          <p className="p-2 text-gray-400">Ничего не найдено</p>
+            )}
+          </div>
         )}
-      </div>
-    )}
-  </div>
-)}
 
 
         {/* меню — мобильное */}
