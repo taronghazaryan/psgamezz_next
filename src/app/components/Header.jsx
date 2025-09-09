@@ -22,14 +22,13 @@ const Header = () => {
   const menuRef = useRef(null);
   const debounceRef = useRef(null);
 
-
-
   const getLinkStyle = (path) => {
     if (pathname === "/") return "text-white";
     if (pathname === "/subscription" && path === "/subscription") return "text-[#FEE44E]";
     return pathname === path ? "text-[#00B5F1]" : "text-white";
   };
 
+  // Клик вне меню закрывает его
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false);
@@ -38,6 +37,7 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Поиск с debounce
   useEffect(() => {
     if (!query.trim()) {
       setResults([]);
@@ -70,22 +70,39 @@ const Header = () => {
     setMobileSearchOpen(false);
     setMenuOpen(false);
   };
-   
+
+  // переключатели
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+    if (!menuOpen) setMobileSearchOpen(false); // закрываем поиск при открытии меню
+  };
+
+  const toggleSearch = () => {
+    setMobileSearchOpen(!mobileSearchOpen);
+    if (!mobileSearchOpen) setMenuOpen(false); // закрываем меню при открытии поиска
+  };
+
   return (
     <div className="bg-[#202562] text-white relative px-4">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="flex items-center py-2 justify-between">
-          <button className="text-2xl hidden max-[900px]:block" onClick={() => setMenuOpen(!menuOpen)}>
+      <div className="max-w-[1400px] mx-auto relative">
+        <div className="flex items-center py-2 justify-between relative z-50">
+          {/* кнопка меню */}
+          <button
+            className="text-2xl hidden max-[900px]:block"
+            onClick={toggleMenu}
+          >
             {menuOpen ? <IoClose /> : <IoMenu />}
           </button>
 
+          {/* кнопка поиска */}
           <button
             className="text-[2rem] hidden max-[900px]:block max-[600px]:text-[1.5rem]"
-            onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+            onClick={toggleSearch}
           >
             <IoSearch />
           </button>
 
+          {/* Лого */}
           <Link href="/" onClick={() => setMenuOpen(false)}>
             <Image
               className="w-[120px] h-[72px] max-[600px]:w-[60px] max-[600px]:h-[31px]"
@@ -97,6 +114,7 @@ const Header = () => {
             />
           </Link>
 
+          {/* ссылки — десктоп */}
           <Link href="/games" className="max-[900px]:hidden">
             <div className={`flex items-center gap-1 ${getLinkStyle("/games")}`}>
               <Image
@@ -123,7 +141,7 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* ПК поиск */}
+          {/* поиск — ПК */}
           <div className="relative w-[220px] max-[900px]:hidden">
             <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
               <IoSearch className="text-gray-400 text-[1.2rem]" />
@@ -169,81 +187,83 @@ const Header = () => {
             )}
           </div>
 
-    <Link href="/basket" onClick={() => setMenuOpen(false)}>
-      <div className="relative flex items-center gap-1">
-        <Image
-          className="h-[22px] w-[22px] max-[600px]:w-[12px] max-[600px]:h-[12px]"
-          src="/logo/5.png"
-          alt="Корзина"
-          width={22}
-          height={22}
-        />
-
-        {mounted && totalItems > 0 && (
-          <span
-            className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold
-                       rounded-full flex items-center justify-center
-                       min-w-[18px] h-[18px] px-1 leading-none"
-          >
-            {totalItems}
-          </span>
-        )}
-
-        <p className="text-[16px] font-[500] max-[900px]:hidden">корзина</p>
-      </div>
-    </Link>
+          {/* корзина */}
+          <Link href="/basket" onClick={() => setMenuOpen(false)}>
+            <div className="relative flex items-center gap-1">
+              <Image
+                className="h-[22px] w-[22px] max-[600px]:w-[12px] max-[600px]:h-[12px]"
+                src="/logo/5.png"
+                alt="Корзина"
+                width={22}
+                height={22}
+              />
+              {mounted && totalItems > 0 && (
+                <span
+                  className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full flex items-center justify-center min-w-[18px] h-[18px] px-1 leading-none"
+                >
+                  {totalItems}
+                </span>
+              )}
+              <p className="text-[16px] font-[500] max-[900px]:hidden">корзина</p>
+            </div>
+          </Link>
         </div>
 
-        {/* мобильный поиск */}
-        {mobileSearchOpen && (
-          <div className="px-4 py-2 bg-[#282E79] md:hidden relative">
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Поиск..."
-              className="w-full pr-10 pl-4 py-2 bg-[#202562] text-white rounded-[12px] focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            {query && (
-              <div className="absolute top-full left-0 w-full bg-[#202562] rounded-md shadow-lg mt-1 max-h-[250px] overflow-y-auto z-50">
-                {loading ? (
-                  <p className="p-2 text-gray-400">Загрузка...</p>
-                ) : results.length > 0 ? (
-                  results.map((game) => (
-                    <Link
-                      key={game.id}
-                      href={`/games/${game.slug}`}
-                      className="flex items-center gap-3 p-2 hover:bg-[#2f368a] transition rounded-lg"
-                      onClick={() => handleSelectGame(game)}
-                    >
-                      <Image
-                        src={game.main_image_url}
-                        alt={game.title}
-                        width={40}
-                        height={56}
-                        className="w-10 h-14 object-cover rounded-md flex-shrink-0"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-sm">{game.title}</p>
-                        <p className="text-xs text-gray-300">
-                          от {game.prices?.without_activation?.[0]?.PS4 || game.prices?.without_activation?.[0]?.PS5 || "—"} ₽
-                        </p>
-                      </div>
-                    </Link>
-                  ))
-                ) : (
-                  <p className="p-2 text-gray-400">Ничего не найдено</p>
-                )}
+        {/* поиск — мобильный */}
+{mobileSearchOpen && (
+  <div className="absolute top-full left-0 w-full px-4 py-2 bg-[#282E79] md:hidden z-50">
+     <input
+      type="text"
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      placeholder="Поиск..."
+      className="w-full pr-10 pl-4 py-2 bg-[#202562] text-white rounded-[12px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+    {query && (
+      <div className="absolute top-full left-0 w-full bg-[#202562] rounded-md shadow-lg mt-1 max-h-[250px] overflow-y-auto z-50">
+        {loading ? (
+          <p className="p-2 text-gray-400">Загрузка...</p>
+        ) : results.length > 0 ? (
+          results.map((game) => (
+            <Link
+              key={game.id}
+              href={`/games/${game.slug}`}
+              className="flex items-center gap-3 p-2 hover:bg-[#2f368a] transition rounded-lg"
+              onClick={() => handleSelectGame(game)}
+            >
+              <Image
+                src={game.main_image_url}
+                alt={game.title}
+                width={40}
+                height={56}
+                className="w-10 h-14 object-cover rounded-md flex-shrink-0"
+              />
+              <div className="flex flex-col">
+                <p className="font-medium text-sm">{game.title}</p>
+                <p className="text-xs text-gray-300">
+                  от{" "}
+                  {game.prices?.without_activation?.[0]?.PS4 ||
+                    game.prices?.without_activation?.[0]?.PS5 ||
+                    "—"}{" "}
+                  ₽
+                </p>
               </div>
-            )}
-          </div>
+            </Link>
+          ))
+        ) : (
+          <p className="p-2 text-gray-400">Ничего не найдено</p>
         )}
+      </div>
+    )}
+  </div>
+)}
 
-        {/* мобильное меню */}
+
+        {/* меню — мобильное */}
         {menuOpen && (
           <div
             ref={menuRef}
-            className="absolute top-full left-0 w-full bg-[#282E79] flex flex-col items-center gap-6 py-6 md:hidden"
+            className="absolute top-full left-0 w-full bg-[#282E79] flex flex-col items-center gap-6 py-6 md:hidden z-50"
           >
             <Link href="/" onClick={() => setMenuOpen(false)} className="text-lg font-medium">
               Главная
@@ -259,7 +279,7 @@ const Header = () => {
             </Link>
           </div>
         )}
-        </div>
+      </div>
     </div>
   );
 };

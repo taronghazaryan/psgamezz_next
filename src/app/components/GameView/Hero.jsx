@@ -74,21 +74,6 @@ export default function Hero({ productItem }) {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="robots" content="index, follow" />
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        {image && <meta property="og:image" content={image} />}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        {image && <meta name="twitter:image" content={image} />}
-      </Head>
     
       <div className="relative w-full min-h-screen">
         {/* Фоновое изображение */}

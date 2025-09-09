@@ -7,7 +7,7 @@ const BasketItem = ({ item, index }) => {
 	const { toggleItemCheck, removeFromBasket, changeQuantity } = useBasket();
 
 	const imgSrc = item.main_image_url
-		? "https://psgamezz.ru" + item.main_image_url
+		? item.main_image_url
 		: item.img;
 	const price = item.price ?? 0;
 	const quantity = item.quantity ?? 1;

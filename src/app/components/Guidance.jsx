@@ -287,46 +287,48 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
         </div>
 
         {/* FAQ */}
-        <div>
-          <h3 className="text-3xl max-sm:text-[15px] font-bold text-primary mb-3">
-            Часто задаваемые вопросы
-          </h3>
-          <div className="flex flex-wrap gap-x-10 rounded-xl gap-y-2 max-sm:gap-3 max-sm:border max-sm:border-primary max-sm:px-2 max-sm:py-1">
-            {questions.map((item, index) => {
-              const isOpen = openIndex === index;
-              return (
-                <div key={index} className="flex flex-col gap-2 sm:w-[45%] max-sm:gap-1">
-                  <div className="flex items-center max-sm:justify-between gap-2">
-                    <p className="text-primary font-semibold leading-5 max-sm:text-xs max-sm:font-bold">
-                      {item.question}
-                    </p>
-                    <div
-                      className="border border-primary rounded-md max-sm:rounded-sm"
-                      onClick={() => setOpenIndex(isOpen ? null : index)}
-                    >
-                      <button
-                        className={`flex items-center justify-center px-3 text-lg rounded-sm cursor-pointer max-sm:w-4 max-sm:h-3 max-sm:rounded-xs max-sm:text-sm max-sm:pb-0.5 max-sm:px-0 ${isOpen ? "bg-white text-primary" : "bg-primary text-white"
-                          }`}
-                      >
-                        {isOpen ? "-" : "+"}
-                      </button>
-                    </div>
-                  </div>
-                  <div
-                    className={`transition-all duration-800 overflow-hidden ${isOpen ? "max-h-50 opacity-100" : "max-h-0 opacity-0"
-                      }`}
-                  >
-                    <div className="bg-primary py-2 px-2.5 rounded-2xl mt-2 max-sm:rounded-lg max-sm:py-1.5 max-sm:mt-1.5">
-                      <p className="text-white max-sm:text-xs max-sm:font-bold">
-                        {item.answer}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+<div className="w-full max-w-[1400px] mx-auto px-4">
+  <h3 className="text-3xl max-sm:text-[15px] font-bold text-primary mb-3">
+    Часто задаваемые вопросы
+  </h3>
+  <div className="flex flex-wrap gap-x-10 gap-y-4 max-sm:gap-3">
+    {questions.map((item, index) => {
+      const isOpen = openIndex === index;
+      return (
+        <div
+          key={index}
+          className="w-full sm:w-[48%] flex flex-col gap-2 max-sm:gap-1"
+        >
+          <div className="flex items-center gap-2">
+            <p className="text-primary font-semibold leading-5 max-sm:text-xs max-sm:font-bold">
+              {item.question}
+            </p>
+            <button
+              className={`flex items-center justify-center px-2 py-1 text-lg rounded-sm cursor-pointer max-sm:w-4 max-sm:h-3 max-sm:rounded-xs max-sm:text-sm max-sm:pb-0.5 max-sm:px-0 ${
+                isOpen ? "bg-white text-primary" : "bg-primary text-white"
+              }`}
+              onClick={() => setOpenIndex(isOpen ? null : index)}
+            >
+              {isOpen ? "-" : "+"}
+            </button>
+          </div>
+          <div
+            className={`transition-all duration-500 overflow-hidden ${
+              isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="bg-primary py-2 px-2.5 rounded-2xl mt-2 max-sm:rounded-lg max-sm:py-1.5 max-sm:mt-1.5">
+              <p className="text-white max-sm:text-xs max-sm:font-bold">
+                {item.answer}
+              </p>
+            </div>
           </div>
         </div>
+      );
+    })}
+  </div>
+</div>
+
       </div>
     </div>
   );
