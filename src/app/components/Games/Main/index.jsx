@@ -10,7 +10,9 @@ export default function Main() {
       <div className="px-6">
         <Hero />
       </div>
-      <Products />
+      <div className="px-6">
+        <Products />
+      </div>
       <div className="px-6">
         <Questions />
       </div>

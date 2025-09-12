@@ -6,8 +6,12 @@ export default function HomePage() {
   return (
     <div>
       <Hero />
-      <Section2 />
-      <Section3 />
+      <div className="px-4">
+        <Section2 />
+      <div className="px-4">
+        <Section3 />
+      </div>
+      </div>
     </div>
   );
 }

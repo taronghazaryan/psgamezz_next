@@ -14,6 +14,41 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 
 	const consoleNames = consoleTypes.map((c) => c.name);
 
+	const featuress = [
+		{
+		title: "Коллекция PlayStation Plus",
+		icon: "/icons/small1.svg",
+		},
+		{
+		title: "Эксклюзивные материалы",
+		icon: "/icons/small2.svg",
+		},
+		{
+		title: "Сетевые режимы игр",
+		icon: "/icons/small3.svg",
+		},
+		{
+		title: "Share Play",
+		icon: "/icons/small4.svg",
+		},
+		{
+		title: "Новые игры каждый месяц",
+		icon: "/icons/small5.svg",
+		},
+		{
+		title: "Эксклюзивные скидки",
+		icon: "/icons/small6.svg",
+		},
+		{
+		title: "Облачное хранилище",
+		icon: "/icons/small7.svg",
+		},
+		{
+		title: "Справка по игре",
+		icon: "/icons/small8.svg",
+		},
+  	];
+
 	useEffect(() => {
 		if (psType === null && consoleNames.length > 0) {
 			setPsType(consoleNames[0]);
@@ -101,14 +136,14 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 					<div className="flex flex-col lg:flex-row gap-8">
 						{/* Левая карточка */}
 						<div className="bg-primary rounded-3xl p-8 text-white 
-						w-full md:w-[400px] md:h-[400px] xl:w-[400px] xl:h-[400px]">
+						w-full md:w-[420px] xl:w-[400px] xl:h-[400px]">
 
 						{/* Центрируем контент */}
 							<div className="flex flex-col items-center justify-center gap-8 h-full">
 								<img
 								src="/img/btns.png"
 								alt=""
-								className="w-64 h-64 md:w-48 md:h-48 max-sm:w-24 max-sm:h-24"
+								className="xl:w-80 xl:h-80 md:w-74 md:h-74 max-sm:w-24 max-sm:h-24"
 								/>
 								<h2 className="text-3xl font-bold md:text-2xl max-sm:text-[16px]">
 								{selectedTier || "Загрузка..."}
@@ -260,10 +295,28 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 								<h3 className="text-[16px] max-md:text-sm text-left font-bold text-primary mb-3">
 									Что входит в подписку?
 								</h3>
-								<div className="flex flex-wrap gap-3 max-md:gap-2 max-sm:gap-1">
+								{/* <div className="flex flex-wrap gap-3 max-md:gap-2 max-sm:gap-1">
 									<div className="flex items-center rounded-sm text-xs max-md:text-[11px] max-sm:text-[9px] p-1 px-2 max-sm:p-0.5 max-sm:px-1 gap-2 max-sm:gap-1 bg-primary text-gray-200">
 										Игры по подписке, эксклюзивы и скидки
 									</div>
+								</div> */}
+								              
+								<div className="flex flex-wrap gap-3 max-sm:gap-1">
+								{featuress.map((feature, index) => (
+									<div
+									key={index}
+									className="inline-flex rounded-sm px-2 py-1 bg-primary max-sm:px-1 max-sm:py-0.5"
+									>
+										<img
+											src={feature.icon}         // путь к картинке
+											alt={feature.title}
+											className="w-5 h-5 object-contain max-sm:w-3 max-sm:h-3"
+										/>
+										<p className="text-[14px] text-gray-200 font-bold max-sm:text-[9px]">
+											{feature.title}
+										</p>
+									</div>
+								))}
 								</div>
 							</div>
 						</div>

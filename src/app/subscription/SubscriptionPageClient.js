@@ -5,6 +5,7 @@ import Guidance from "../components/Guidance";
 import PsPlus from "../components/PsPlus";
 import Hero from "../components/SubscriptionHero";
 import Api from "../connectors";
+import Image from "next/image";
 
 export default function SubscriptionPageClient() {
   const [psPlusSubs, setPsPlusSubs] = useState([]);
@@ -41,8 +42,38 @@ export default function SubscriptionPageClient() {
     <>
       <Hero />
       <div>
+                
+
         <div className="px-6">
             <PsPlus subscriptions={psPlusSubs} consoleTypes={consoleTypes} />
+        </div>
+        <div className="relative w-screen">
+          <div className="flex flex-col lg:flex-row items-center justify-between mb-12 max-sm:mb-6">
+
+            {/* ROBOT — только ≥1280px */}
+            <div className="absolute hidden xl:block -left-80 -top-[60px] z-[50]">
+              <Image
+                src="/img/robot.png"
+                alt="Robot mascot"
+                className="w-[800px] h-[800px] object-contain rotate-[30deg]"
+                width={435}
+                height={435}
+              />
+            </div>
+
+            {/* CONTROLLER — только ≥1280px */}
+            <div className="absolute hidden xl:block -top-[60px] !right-[-470px] rotate-[19deg] z-[50]">
+              <Image
+                src="/img/controller.png"
+                alt="controller"
+                className="xl:w-[800px] xl:h-[800px] lg:w-[360px] lg:h-[360px] object-contain"
+                width={460}
+                height={460}
+              />
+            </div>
+
+          </div>
+
         </div>
         <div className="px-6">
             <Guidance subscriptions={eaPlaySubs} consoleTypes={consoleTypes} />

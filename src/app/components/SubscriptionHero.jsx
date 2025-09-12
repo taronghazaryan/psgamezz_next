@@ -68,6 +68,8 @@ export default function SubscriptionHero() {
         />
       </div>
 
+      
+
       {/* Телефон: <950px → скрываем полностью */}
     </div>
   );

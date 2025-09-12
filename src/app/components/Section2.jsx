@@ -4,6 +4,8 @@ import Image from "next/image";
 
 const Section2 = () => {
   return (
+            <div className="w-full max-w-[1400px] mx-auto">
+
     <div className="md:mb-10">
       <p className="font-[700] text-[#202562] text-[16px] sm:text-[20px] md:text-[28px] lg:text-[32px] text-center py-4 my-4">
         Мы создаем рай для геймеров
@@ -26,7 +28,7 @@ const Section2 = () => {
         <div className="flex gap-3 justify-center">
           <a href="/subscription">
             <Image
-              className="w-[150px] md:w-[200px] lg:w-[250px] h-[400px] md:h-[450px] cursor-pointer"
+              className="xl:w-[165px] md:w-[200px] lg:w-[250px] xl:h-[480px] md:h-[450px] cursor-pointer"
               src="/images/Card3_2.png"
               alt="Card3"
               width={250}
@@ -35,7 +37,7 @@ const Section2 = () => {
           </a>
           <a href="/subscription">
             <Image
-              className="w-[200px] md:w-[280px] lg:w-[300px] h-[400px] md:h-[450px] cursor-pointer"
+              className="xl:w-[305px] md:w-[280px] lg:w-[300px] xl:h-[480px] md:h-[450px] cursor-pointer"
               src="/images/Card4_2.png"
               alt="Card4"
               width={300}
@@ -44,6 +46,7 @@ const Section2 = () => {
           </a>
         </div>
       </div>
+    </div>
     </div>
   );
 };

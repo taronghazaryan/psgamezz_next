@@ -72,7 +72,7 @@ const BasketItem = ({ item, index }) => {
 					{/* Кнопка удалить */}
 					<button
 						onClick={() => removeFromBasket(index)}
-						className="text-red-600 font-semibold mt-3 max-[900px]:w-full max-[900px]:text-center max-[900px]:py-2 max-[900px]:bg-red-100 max-[900px]:rounded-lg hover:bg-red-200"
+						className="text-red-600 font-semibold mt-3 max-[900px]:w-full max-[900px]:text-center max-[900px]:py-2 border border-[red-100] max-[900px]:bg-red-100 max-[900px]:rounded-lg hover:bg-red-200"
 					>
 						Удалить
 					</button>

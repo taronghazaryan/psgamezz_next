@@ -42,7 +42,7 @@ export default function Questions() {
 	return (
 		    // <div className="main-container my-12 grid grid-cols-2 lg:px-20 max-sm:grid-cols-1 max-sm:gap-8 md:gap-8 px-6 md:px-6 px-28 max-sm:p-4">
 
-<div className="w-full max-w-[1400px] mx-auto main-container my-12 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
+			<div className="w-full max-w-[1400px] mx-auto main-container my-12 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
     			<div className='flex flex-col justify-self-start gap-2.5 py-4'>
 				<h1 className='text-3xl max-sm:text-base font-bold text-primary max-sm:mb-2'>
 					Возникли вопросы?

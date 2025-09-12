@@ -86,52 +86,64 @@ export default function Products() {
 
   function renderSwiper(title, productsList, prevClass, nextClass, showEmptyMessage = false) {
     return (
-      <div className="relative mt-8 overflow-hidden">
-        <div className="flex gap-3 px-15 mb-6 max-sm:justify-between max-sm:px-4 max-sm:mb-3 items-center">
-          <button className={prevClass} aria-label={`Previous Slide ${title}`}>
-            <Image src='/icons/left.svg' alt="left arrow" width={20} height={20} />
-          </button>
-          <p className="text-primary text-3xl font-bold max-sm:text-base">{title}</p>
-          <button className={nextClass} aria-label={`Next Slide ${title}`}>
-            <Image src='/icons/right.svg' alt="right arrow" width={20} height={20} />
-          </button>
+    <div className="w-full max-w-[1400px] mx-auto">
+        <div className="relative mt-8 overflow-hidden">
+          <div className="flex gap-3 px-15 mb-6 max-sm:justify-between  max-sm:mb-3 items-center">
+            <button className={prevClass} aria-label={`Previous Slide ${title}`}>
+              <Image src='/icons/left.svg' alt="left arrow" width={20} height={20} />
+            </button>
+            <p className="text-primary text-3xl font-bold max-sm:text-base">{title}</p>
+            <button className={nextClass} aria-label={`Next Slide ${title}`}>
+              <Image src='/icons/right.svg' alt="right arrow" width={20} height={20} />
+            </button>
+          </div>
+
+          <Swiper
+            spaceBetween={15}
+            modules={[Navigation, Pagination, Autoplay, Scrollbar]}
+            scrollbar={{
+              el: ".swiper-scrollbar-custom",
+              draggable: true,
+              dragSize: "auto",
+            }}
+            slidesPerView="auto"
+            breakpoints={{
+              320: { centeredSlides: false },
+              768: { centeredSlides: false },
+              1024: { centeredSlides: false },
+            }}
+            navigation={{ nextEl: `.${nextClass}`, prevEl: `.${prevClass}` }}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            className="solutions-swiper"
+          >
+            {productsList.map((item, index) => (
+              <SwiperSlide key={`${item.id || item.slug || item.title}-${index}`} className="!w-auto">
+                <Card {...item} activationType="with_activation" />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {showEmptyMessage && productsList.length === 0 && (
+            <p className="mt-4 text-center text-gray-500 font-semibold">Пока нет распродажи</p>
+          )}
         </div>
-
-        <Swiper
-          spaceBetween={15}
-          modules={[Navigation, Pagination, Autoplay, Scrollbar]}
-          scrollbar={{
-            el: ".swiper-scrollbar-custom",
-            draggable: true,
-            dragSize: "auto",
-          }}
-          slidesPerView="auto"
-          breakpoints={{
-            1024: { centeredSlides: false },
-          }}
-          navigation={{ nextEl: `.${nextClass}`, prevEl: `.${prevClass}` }}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          className="solutions-swiper"
-        >
-          {productsList.map((item, index) => (
-            <SwiperSlide key={`${item.id || item.slug || item.title}-${index}`} className="!w-auto">
-              <Card {...item} activationType="with_activation" />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-        {showEmptyMessage && productsList.length === 0 && (
-          <p className="mt-4 text-center text-gray-500 font-semibold">Пока нет распродажи</p>
-        )}
       </div>
-    );
-  }
+      );
+    }
 
-  return (
-    <div className="flex flex-col gap-12 max-sm:px-4">
-      {renderSwiper("Распродажа 🚨", saleProducts, "swiper-button-prev-custom1", "swiper-button-next-custom1", true)}
-      {renderSwiper("Популярные", popularProducts, "swiper-button-prev-custom2", "swiper-button-next-custom2")}
-      {renderSwiper("Новинки", newProducts, "swiper-button-prev-custom3", "swiper-button-next-custom3")}
-    </div>
+    return (
+      <div className="flex flex-col gap-12">
+          {saleProducts?.length > 0 && (
+          renderSwiper(
+            "Распродажа 🚨",
+            saleProducts,
+            "swiper-button-prev-custom1",
+            "swiper-button-next-custom1",
+            true
+          )
+          )}
+        {renderSwiper("Популярные", popularProducts, "swiper-button-prev-custom2", "swiper-button-next-custom2")}
+        {renderSwiper("Новинки", newProducts, "swiper-button-prev-custom3", "swiper-button-next-custom3")}
+      </div>
   );
 }

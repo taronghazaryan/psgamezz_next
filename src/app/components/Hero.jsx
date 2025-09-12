@@ -36,7 +36,7 @@ const Hero = () => {
         </div>
 
         {/* Текст */}
-<div className="flex flex-col items-center justify-center text-center w-full mt-18 md:mt-0">
+        <div className="flex flex-col items-center justify-center text-center w-full mt-18 md:mt-0">
           <p className="max-w-[100%] mx-auto text-center text-[30px] font-[900] md:text-[48px] xl:text-[80px]">
               Всё для вашей PlayStation <br />
             <span className="text-[#FFE245]">без головной боли</span>

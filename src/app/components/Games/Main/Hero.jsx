@@ -77,7 +77,7 @@ export default function Hero() {
       </div>
 
       {/* Mobile */}
-      <div className="sm:hidden py-6 px-4">
+      <div className="sm:hidden py-6">
         <Swiper
           spaceBetween={16}
           pagination={{ dynamicBullets: true }}
