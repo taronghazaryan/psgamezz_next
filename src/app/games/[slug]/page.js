@@ -60,6 +60,18 @@ export async function generateMetadata({ params }) {
   return {
     title: game.results[0].title || "Магазин игр",
     description: game.results[0].about || "Описание игры отсутствует",
+    openGraph: {
+      title: game.results[0].title || "Магазин игр",
+      description: game.results[0].about || "Описание игры отсутствует",
+      images: [
+        {
+          url: game.results[0].main_image_url,
+          width: 1200,
+          height: 630,
+          alt: game.results[0].title || "Обложка игры",
+        },
+      ],
+    },
   };
 }
 
