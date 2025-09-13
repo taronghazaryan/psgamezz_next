@@ -3,6 +3,14 @@
 import Image from "next/image";
 
 export default function SubscriptionHero() {
+
+  const handleScroll = () => {
+  const target = document.getElementById("subscriptions");
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth" });
+  }
+  };
+
   return (
     <div
       style={{ backgroundImage: `url("/hero.png")` }}
@@ -20,7 +28,7 @@ export default function SubscriptionHero() {
         <p className="text-4xl xl:text-4xl lg:text-3xl md:text-lg sm:text-base max-sm:text-[15px] text-white mb-5">
           Подписывайтесь на PlayStation Plus и получайте доступ к играм по лучшим ценам!
         </p>
-        <button className="bg-secondary hover:bg-yellow-200 text-[#25328F] font-bold rounded-2xl xl:px-8 xl:py-6 p-8 lg:px-6 lg:py-4 md:px-5 md:py-3 sm:px-4 sm:py-2 max-sm:px-3 max-sm:py-2 max-sm:text-sm">
+        <button onClick={handleScroll} className="bg-secondary hover:bg-yellow-200 text-[#25328F] xl:text-2xl md:text-xl font-bold rounded-2xl xl:px-8 xl:py-6 p-8 lg:px-6 lg:py-4 md:px-5 md:py-3 sm:px-4 sm:py-2 max-sm:px-3 max-sm:py-2 max-sm:text-sm">
           Подключить подписку
         </button>
       </div>

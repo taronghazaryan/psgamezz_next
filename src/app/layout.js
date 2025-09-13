@@ -1,31 +1,24 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css"; // только здесь импорт CSS
+// layout.js
+import { Montserrat } from "next/font/google";
+import "./globals.css";
 import { BasketProvider } from "./context/BasketContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const montserrat = Montserrat({
+  weight: ["400", "700", "900"],
   subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata = {
-  title: "PSGamezz",
-  description: "Магазин игр и подписок для PlayStation",
-};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col `}>
+      <body className={`${montserrat.variable} font-montserrat antialiased min-h-screen flex flex-col`}>
         <BasketProvider>
           <Header />
-            <main className="flex-1 flex flex-col">{children}</main>
+          <main className="flex-1 flex flex-col">{children}</main>
           <Footer />
         </BasketProvider>
       </body>

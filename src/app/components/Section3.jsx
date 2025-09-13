@@ -75,7 +75,7 @@ const Section3 = () => {
 
     <div className="relative w-full py-10">
       {/* Title + Arrows */}
-      <div className="flex justify-between items-center max-w-[1140px] mx-auto mb-8">
+      <div className="flex justify-between items-center max-w-[1140px] mx-auto mb-8"  id="reviews">
         <button className="swiper-button-prev-custom text-[#1e1f5e]">
           <FaArrowLeft size={20} />
         </button>
@@ -154,7 +154,7 @@ const Section3 = () => {
                 ))}
                 {card.button && (
                   <button className="bg-[#0E56D7] w-[80%] h-[32px] md:h-[45px] rounded-[10px] text-[12px] md:text-[16px] font-[700]">
-                    {card.button}
+                    <a href="https://t.me/psgamezz">{card.button}</a>
                   </button>
                 )}
               </div>

@@ -124,28 +124,28 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 		<div className="w-full max-w-[1400px] mx-auto">
 			<div className="py-6 max-md:p-4 max-sm:p-4">
 				<div >
-					<div className="text-center mb-12 max-md:mb-6 max-sm:mb-2.5 max-sm:mt-5">
-						<h1 className="text-4xl font-bold text-primary mb-2 max-md:text-2xl max-sm:text-[16px] max-sm:mb-0">
+					<div className="text-center mb-12 max-md:mb-6 max-sm:mb-2.5 max-sm:mt-5" id="subscriptions">
+						<h1 className="xl:text-4xl md:text-3xl xl:font-[900] md:font-[900] font-montserrat text-primary mb-2 max-md:text-2xl max-sm:text-[16px] max-sm:mb-0">
 							PlayStation Plus
 						</h1>
-						<p className="text-primary text-2xl max-md:text-lg max-sm:text-[10px]">
+						<p className="text-primary xl:text-2xl md:text-xl max-md:text-lg max-sm:text-[10px]">
 							Выберите подходящую подписку
 						</p>
 					</div>
 
-					<div className="flex flex-col lg:flex-row gap-8">
+					<div className="flex flex-col lg:flex-row gap-8" id="psplus">
 						{/* Левая карточка */}
 						<div className="bg-primary rounded-3xl p-8 text-white 
-						w-full md:w-[420px] xl:w-[400px] xl:h-[400px]">
+						w-full md:w-[420px] xl:w-[400px] xl:h-auto">
 
 						{/* Центрируем контент */}
-							<div className="flex flex-col items-center justify-center gap-8 h-full">
+							<div className="flex flex-col items-center justify-center gap-1 h-full">
 								<img
 								src="/img/btns.png"
 								alt=""
 								className="xl:w-80 xl:h-80 md:w-74 md:h-74 max-sm:w-24 max-sm:h-24"
 								/>
-								<h2 className="text-3xl font-bold md:text-2xl max-sm:text-[16px]">
+								<h2 className="xl:text-4xl md:text-3xl font-bold md:text-2xl max-sm:text-[16px]">
 								{selectedTier || "Загрузка..."}
 								</h2>
 							</div>
@@ -156,7 +156,7 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 						<div className="grid grid-cols-2 max-md:grid-cols-1 max-sm:grid-cols-1 gap-x-8 gap-y-2.5 bg-white rounded-3xl border-1 border-primary p-8 max-md:p-6 max-sm:p-4 flex-1">
 							<div className="flex flex-col justify-between">
 								<div>
-									<h2 className="text-3xl text-left font-bold text-primary mb-1 max-md:text-xl max-sm:text-[16px]">
+									<h2 className="xl:text-4xl md:text-3xl text-left font-[900] text-primary mb-1 max-sm:text-[16px]">
 										PlayStation Plus {selectedTier || ""}
 									</h2>
 									<div className="flex items-center text-primary text-sm max-md:text-xs max-sm:text-[10px] gap-1">
@@ -170,24 +170,29 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 								</div>
 
 								{/* Выбор консоли */}
-								<div className="flex gap-3 mb-6 max-md:mb-4 max-sm:mb-3">
-									{consoleNames.map((name, index) => (
-										<button
-											key={`${name}-${index}`}
-											onClick={() => setPsType(name)}
-											className={`px-4 py-2 border-primary border-1 rounded-lg font-medium max-md:text-sm max-sm:text-[12px] ${psType === name
-												? "bg-primary text-white"
-												: "bg-white text-primary hover:bg-gray-300"
-												}`}
-										>
-											{name}
-										</button>
-									))}
+								<div>
+									<h3 className="xl:text-xl md:text-xl max-sm:text-sm text-left  font-[600] text-primary mb-1.5">
+											Консоль
+									</h3>
+									<div className="flex gap-3 mb-1 max-md:mb-4 max-sm:mb-3">
+										{consoleNames.map((name, index) => (
+											<button
+												key={`${name}-${index}`}
+												onClick={() => setPsType(name)}
+												className={`px-4 py-1 border-primary border-1 rounded-lg font-[900] max-md:text-sm max-sm:text-[12px] cursor-pointer ${psType === name
+													? "bg-primary text-white"
+													: "bg-white text-primary hover:bg-gray-300"
+													}`}
+											>
+												{name}
+											</button>
+										))}
+									</div>
 								</div>
 
 								{/* Выбор уровня */}
 								<div>
-									<h3 className="text-xl max-md:text-lg max-sm:text-sm text-left font-normal text-primary mb-1.5">
+									<h3 className="xl:text-xl md:text-xl max-sm:text-sm text-left  font-[600] text-primary mb-1">
 										Уровень подписки
 									</h3>
 									<div className="flex gap-3 no-scrollbar">
@@ -201,7 +206,7 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 											setSelectedDuration(sub.periods[0].months.toString());
 											}
 										}}
-										className={`py-3 px-4 rounded-lg font-medium transition-colors whitespace-nowrap ${
+										className={`py-3 px-4 rounded-[10px] font-[900] transition-colors whitespace-nowrap cursor-pointer ${
 											selectedTier === tier
 											? "bg-primary text-white"
 											: "bg-gray-200 text-primary hover:bg-gray-300"
@@ -217,7 +222,7 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 
 							{/* Выбор длительности */}
 							<div className="flex flex-col gap-2">
-								<h3 className="text-xl max-md:text-lg max-sm:text-sm text-left font-semibold text-gray-800">
+								<h3 className="xl:text-xl md:text-xl max-sm:text-sm text-left  font-[600] text-primary">
 									Длительность подписки
 								</h3>
 								<div className="flex flex-col gap-2.5">
@@ -253,7 +258,7 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 														{durationValue === "1" ? "месяц" : "месяцев"}
 													</span>
 												</div>
-												<span className="font-bold text-[15px]">
+												<span className="xl:text-[15px] font-[600] text-[15px]">
 													{period.price}₽
 												</span>
 											</button>
@@ -279,8 +284,8 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 												}
 												className={`w-full ${inBasket
 													? "bg-gray-400 cursor-not-allowed"
-													: "bg-secondary hover:bg-blue-700 hover:shadow-lg"
-													} text-black py-2 rounded-lg text-lg max-sm:text-sm transition-colors`}
+													: "bg-secondary hover:bg-[#E6CB3E] hover:shadow-lg"
+													} text-primary font-[600] py-2 rounded-lg text-lg max-sm:text-sm transition-colors cursor-pointer`}
 											>
 												{inBasket ? "В корзине" : "В корзину"}
 											</button>
@@ -292,7 +297,7 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 
 							{/* Описание */}
 							<div className="col-span-2 max-md:col-span-1 max-sm:col-span-1">
-								<h3 className="text-[16px] max-md:text-sm text-left font-bold text-primary mb-3">
+								<h3 className="xl:text-[16px] md:text-[14px] text-left font-[600] text-primary mb-3">
 									Что входит в подписку?
 								</h3>
 								{/* <div className="flex flex-wrap gap-3 max-md:gap-2 max-sm:gap-1">
@@ -305,14 +310,14 @@ export default function PsPlus({ subscriptions, consoleTypes }) {
 								{featuress.map((feature, index) => (
 									<div
 									key={index}
-									className="inline-flex rounded-sm px-2 py-1 bg-primary max-sm:px-1 max-sm:py-0.5"
+									className="inline-flex rounded-[10px] px-2 py-1 bg-primary max-sm:px-1 max-sm:py-0.5"
 									>
 										<img
 											src={feature.icon}         // путь к картинке
 											alt={feature.title}
-											className="w-5 h-5 object-contain max-sm:w-3 max-sm:h-3"
+											className="w-5 h-5 py-1 object-contain max-sm:w-3 max-sm:h-3"
 										/>
-										<p className="text-[14px] text-gray-200 font-bold max-sm:text-[9px]">
+										<p className=" text-[14px] text-gray-200 font-normal max-sm:text-[9px]">
 											{feature.title}
 										</p>
 									</div>

@@ -127,7 +127,7 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
 
       
       <div className=" py-6 max-sm:px-4 max-sm:py-4 overflow-hidden">
-        <h1 className="text-4xl max-sm:text-[15px] font-bold text-primary mb-8 max-sm:mb-2">
+        <h1 className="xl:text-4xl md:text-3xl font-[900] max-sm:text-[15px] font-bold text-primary mb-8 max-sm:mb-2">
           Как пользоваться?
         </h1>
         <HowToUse />
@@ -155,20 +155,20 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
         </div> */}
 
         {/* Основной блок */}
-        <div className="flex flex-col lg:flex-row gap-8 mt-[100px] mb-12.5 max-sm:py- max-sm:mb-7.5 max-sm:mt-0 max-sm:gap-2.5">
+        <div className="flex flex-col lg:flex-row gap-8 mt-[100px] mb-12.5 max-sm:py-4 max-sm:mb-7.5 max-sm:mt-0 max-sm:gap-2.5" id="eaplay">
           <Image
             src="/img/eaplay.png"
             alt="EA Play"
-            className="rounded-3xl md:w-[420px] md:h-[500px] xl:w-[400px] xl:h-[400px] sm:h-full max-sm:w-full max-sm:h-[150px] object-cover"
+            className="rounded-3xl md:w-[420px] md:h-auto xl:w-[400px] xl:h-[400px] sm:h-full max-sm:w-full max-sm:h-[150px] object-cover"
             width={400}
             height={400}
           />
 
           {/* Карточка */}
 						<div className="grid grid-cols-2 max-md:grid-cols-1 max-sm:grid-cols-1 gap-x-8 gap-y-2.5 bg-white rounded-3xl border-1 border-primary p-8 max-md:p-6 max-sm:p-4 flex-1">
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col justify-between" >
               <div>
-                <h2 className="text-3xl text-left font-bold text-primary mb-1 max-sm:text-base">
+                <h2 className="xl:text-4xl md:text-3xl font-[900]  text-left text-primary mb-1 max-sm:text-base">
                   EA Play
                 </h2>
                 <div className="flex items-center text-primary text-sm max-sm:text-[10px] gap-1">
@@ -185,7 +185,7 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
 
               {/* Выбор консоли */}
               <div className="mb-1">
-                <h3 className="text-xl max-sm:text-sm text-left font-normal text-primary mb-1.5">
+                <h3 className="xl:text-xl md:text-xl max-sm:text-sm text-left font-[600] text-primary mb-1">
                   Консоль
                 </h3>
                 <div className="flex gap-3">
@@ -193,7 +193,7 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
                     <button
                       key={c.id}
                       onClick={() => setPsType(c.name)}
-                      className={`px-4 py-2 border-primary border-1 rounded-lg font-medium max-sm:text-[12px] ${psType === c.name
+                      className={`px-4 py-1 border-primary border-1 rounded-lg font-[900] max-md:text-sm max-sm:text-[12px] cursor-pointer ${psType === c.name
                         ? "bg-primary text-white"
                         : "bg-white text-primary hover:bg-gray-300"
                         }`}
@@ -207,7 +207,7 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
 
             {/* Длительность */}
             <div className="flex flex-col gap-2">
-              <h3 className="text-xl max-sm:text-sm text-left font-semibold text-primary">
+              <h3 className="xl:text-xl md:text-xl max-sm:text-sm text-left font-semibold text-primary">
                 Длительность подписки
               </h3>
               <div className="flex flex-col gap-2.5">
@@ -251,8 +251,8 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
                       onClick={() => handleAddToBasket(duration, psType)}
                       className={`w-full ${inBasket
                         ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-secondary hover:bg-blue-700"
-                        } text-black py-2 rounded-lg text-lg max-sm:text-sm transition-colors`}
+                        : "bg-[#FF4747] hover:bg-[#e63c3c]"
+                        } text-primary font-[600] py-2 rounded-lg text-lg max-sm:text-sm transition-colors cursor-pointer`}
                     >
                       {inBasket ? "В корзине" : "В корзину"}
                     </button>
@@ -264,19 +264,19 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
 
             {/* Преимущества */}
             <div className="col-span-2 max-sm:col-span-1">
-              <h3 className="text-base text-left font-bold text-primary mb-3">
+							<h3 className="xl:text-[16px] md:text-[14px] text-left font-[600] text-primary mb-3">
                 Преимущества EA Play
               </h3>
-                <div className="grid grid-cols-2 md:grid-cols-2 gap-3 max-sm:grid-cols-1 max-sm:gap-1">
+                <div className="grid xl:grid-cols-4 md:grid-cols-2 gap-3 max-sm:grid-cols-1 max-sm:gap-1">
                     {features.map((feature, index) => (
                   <div
                     key={index}
-                    className="flex flex-col rounded-sm p-1 px-2 bg-primary max-sm:p-0.5 max-sm:px-1"
+                    className="flex flex-col rounded-[10px] p-1 px-2 bg-primary max-sm:p-0.5 max-sm:px-1"
                   >
-                    <p className="text-xs text-gray-200 font-bold max-sm:text-[9px]">
+                    <p className="text-[16px] text-gray-200 font-[700] max-sm:text-[9px]">
                       {feature.title}
                     </p>
-                    <p className="text-xs text-gray-200 max-sm:text-[9px]">
+                    <p className="text-[14px] font-normal py-1 text-gray-200 max-sm:text-[9px]">
                       {feature.text}
                     </p>
                   </div>
@@ -288,8 +288,8 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
 
         {/* FAQ */}
         <div className="w-full max-w-[1400px] mx-auto px-4">
-          <h3 className="text-3xl max-sm:text-[15px] font-bold text-primary mb-3">
-            Часто задаваемые вопросы
+          <h3 className="xl:text-4xl md:text-3xl max-sm:text-[15px] font-bold text-primary mb-3">
+            Часто задаваемые вопросы:
           </h3>
           <div className="flex flex-wrap gap-x-10 gap-y-4 max-sm:gap-3">
             {questions.map((item, index) => {
@@ -300,12 +300,12 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
                   className="w-full sm:w-[48%] flex flex-col gap-2 max-sm:gap-1"
                 >
                   <div className="flex items-center gap-2">
-                    <p className="text-primary font-semibold leading-5 max-sm:text-xs max-sm:font-bold">
+                    <p className="text-primary xl:text-[16px] md:text-[16px] font-semibold leading-5 max-sm:text-xs max-sm:font-bold">
                       {item.question}
                     </p>
                     <button
-                      className={`flex items-center justify-center px-2 py-1 text-lg rounded-sm cursor-pointer max-sm:w-4 max-sm:h-3 max-sm:rounded-xs max-sm:text-sm max-sm:pb-0.5 max-sm:px-0 ${
-                        isOpen ? "bg-white text-primary" : "bg-primary text-white"
+                      className={`flex items-center justify-center px-2 py-1 text-lg border border-primary rounded-sm cursor-pointer max-sm:w-4 max-sm:h-3 max-sm:rounded-xs max-sm:text-sm max-sm:pb-0.5 max-sm:px-0 ${
+                        isOpen ? "bg-ehite text-primary" : "bg-primary text-white"
                       }`}
                       onClick={() => setOpenIndex(isOpen ? null : index)}
                     >
@@ -318,7 +318,7 @@ export default function PlayStationPlusDesign({ subscriptions, consoleTypes }) {
                     }`}
                   >
                     <div className="bg-primary py-2 px-2.5 rounded-2xl mt-2 max-sm:rounded-lg max-sm:py-1.5 max-sm:mt-1.5">
-                      <p className="text-white max-sm:text-xs max-sm:font-bold">
+                      <p className="text-white xl:text-[16px] md:text-[14px] max-sm:text-xs max-sm:font-bold">
                         {item.answer}
                       </p>
                     </div>

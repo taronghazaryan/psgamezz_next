@@ -265,7 +265,7 @@ const Header = () => {
             ref={menuRef}
             className="absolute top-full left-0 w-full bg-[#282E79] flex flex-col items-center gap-6 py-6 md:hidden z-50"
           >
-            <Link href="/" onClick={() => setMenuOpen(false)} className="text-lg font-medium">
+            <Link href="/" onClick={() => setMenuOpen(false)} className="text-lg font-medium font-montserrat">
               Главная
             </Link>
             <Link href="/games" onClick={() => setMenuOpen(false)} className="text-lg font-medium">

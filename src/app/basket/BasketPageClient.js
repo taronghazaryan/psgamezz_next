@@ -61,7 +61,7 @@ const BasketPageClient = () => {
     <>
       <div className="px-4">
         <div className="max-w-[1400px] mx-auto relative">
-          <div className="p-4 flex flex-row gap-6 min-h-screen">
+          <div className="py-4 flex flex-row gap-6 min-h-screen">
             {/* Список товаров */}
             <div className="flex-grow max-[900px]:max-h-[calc(100vh-220px)] max-[900px]:overflow-y-auto max-[900px]:pb-24">
               <div className="flex items-center justify-between w-full mb-4">
@@ -174,7 +174,7 @@ const BasketPageClient = () => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+                      className="px-4 py-2 rounded bg-primary text-white hover:bg-[#2A3090]"
                     >
                       {loading ? "Отправка..." : "Подтвердить"}
                     </button>

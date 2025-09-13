@@ -12,7 +12,7 @@ const BasketItem = ({ item, index }) => {
 	const totalPrice = price * quantity;
 
 	return (
-		<div className="px-4">
+		<div className="">
 			<div className="w-full max-w-[1400px] mx-auto">
 				<div className="flex items-center gap-4 mt-8">
 
@@ -72,7 +72,7 @@ const BasketItem = ({ item, index }) => {
 					{/* Кнопка удалить */}
 					<button
 						onClick={() => removeFromBasket(index)}
-						className="text-red-600 font-semibold mt-3 max-[900px]:w-full max-[900px]:text-center max-[900px]:py-2 border border-[red-100] max-[900px]:bg-red-100 max-[900px]:rounded-lg hover:bg-red-200"
+						className="px-4 py-1  bg-[#CC0000] hover:bg-[#FF0033] rounded-lg font-[900] max-md:text-sm max-sm:text-[12px] cursor-pointer"
 					>
 						Удалить
 					</button>

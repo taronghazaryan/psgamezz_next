@@ -265,7 +265,7 @@ export default function AllGames() {
                 <button
                   onClick={loadMoreGames}
                   disabled={loadingMore}
-                  className="px-4 py-2 bg-primary text-white rounded hover:bg-slate-600"
+                  className="px-4 py-2 bg-primary text-white rounded-[10px] hover:bg-slate-600"
                 >
                   {loadingMore ? "Загрузка..." : "Показать еще"}
                 </button>
