@@ -68,9 +68,11 @@ export default function SalesPage() {
 
   if (!games.length)
     return (
-      <h1 className="text-center text-black text-2xl mt-10">
-        Скидок пока нет
-      </h1>
+      <div className="px-4">
+        <h1 className="text-center text-black text-2xl">
+          Скидок пока нет
+        </h1>
+      </div>
     );
 
   return (

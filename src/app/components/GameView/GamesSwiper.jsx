@@ -24,23 +24,25 @@ export default function GamesSwiper({ products = [] }) {
   const randomized = shuffleArray(products);
 
   return (
-    <div className="max-w-[1400px] mx-auto relative">
-      <div className="main-container relative mt-8 overflow-hidden">
+       <div className="w-full max-w-[1400px] mx-auto">
+        <div className="relative mt-8 overflow-hidden">
         <div className="flex gap-3 px-15 mb-6 max-sm:justify-between max-sm:px-4 max-sm:mb-3 items-center">
           <button className="swiper-button-prev-custom3" aria-label="Previous Slide">
             <Image src="/icons/left.svg" alt="left arrow" width={20} height={20} />
           </button>
           <p className="text-primary text-3xl font-bold max-sm:text-base">Новинки</p>
-          <button className="swiper-button-next-custom3 sm:ml-auto" aria-label="Next Slide">
+          <button className="swiper-button-next-custom3" aria-label="Next Slide">
             <Image src="/icons/right.svg" alt="right arrow" width={20} height={20} />
           </button>
         </div>
 
         <Swiper
-          spaceBetween={15}
+          spaceBetween={30}
           modules={[Navigation, Pagination, Autoplay, Scrollbar]}
           slidesPerView="auto"
           breakpoints={{
+            320: { centeredSlides: false },
+            768: { centeredSlides: false },
             1024: { centeredSlides: false },
           }}
           navigation={{
@@ -63,3 +65,4 @@ export default function GamesSwiper({ products = [] }) {
     </div>
   );
 }
+

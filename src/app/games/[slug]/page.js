@@ -74,7 +74,7 @@ export default async function GamesViewPage({ params }) {
 
   return (
     <div>
-      <Hero productItem={productItem} newGames={newGames}/>      {/* клиентский компонент */}
+      <Hero productItem={productItem} />      {/* клиентский компонент */}
       <GamesSwiper products={newGames} />     {/* клиентский компонент */}
       <ReviewsSwiper />                        {/* клиентский компонент */}
     </div>

@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useBasket } from "../../context/BasketContext";
-import Head from "next/head";
 
 export default function Hero({ productItem }) {
   const { basket, addToBasket } = useBasket();
@@ -78,13 +77,19 @@ export default function Hero({ productItem }) {
       <div className="relative w-full min-h-screen">
         {/* Фоновое изображение */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="fixed top-0 left-0 w-full h-full bg-cover bg-center z-[-2]"
           style={{
-            backgroundImage: `url(${productItem.images?.[0] ||  "/images/default.jpg"})`,
+            backgroundImage: `url(${productItem.images?.[0] || "/images/default.jpg"})`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.5)] via-transparent to-white" />
-          
+
+        {/* Плавный градиент сверху вниз */}
+        <div
+          className="fixed top-0 left-0 w-full h-full z-[-1] pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1) 120%)"
+          }}
+        />
 
             <div className="relative flex flex-col lg:flex-row justify-center items-start px-4 md:px-6 py-8 md:py-12 max-w-7xl mx-auto gap-8 lg:gap-10 text-white">
               
@@ -101,7 +106,7 @@ export default function Hero({ productItem }) {
                   alt={productItem.title}
                   width={300}
                   height={320}
-                  className="rounded-2xl w-full h-[300px] sm:h-[300px] lg:h-[320px] object-cover shadow-lg"
+                  className="rounded-[20px] w-full h-[300px] md:w-auto md:h-auto xl:w-auto xl:h-auto sm:h-[300px] lg:h-[320px] object-cover shadow-lg"
                 />
                 {productItem.images?.length > 0 && (
                   <div className="flex flex-wrap justify-center gap-2 mt-3">
@@ -123,15 +128,15 @@ export default function Hero({ productItem }) {
               <div className="flex-1 flex flex-col gap-6">
 
                 {/* Блок выбора */}
-                <div className="flex flex-col md:flex-row bg-[rgba(32,37,98,0.65)] rounded-[20px] md:rounded-[30px] py-6 md:py-8 px-5 md:px-8 shadow-lg gap-6">
+                <div className="flex flex-col xl:h-[300px] md:h-[300px] md:flex-row bg-[rgba(32,37,98,0.5)] rounded-[20px] xl:rounded-[20px] md:rounded-[30px] xl:py-0 py-6 md:py-0 px-5 md:px-8 shadow-lg xl:gap-1">
 
                   <div className="flex-1">
-                    <h1 className="text-2xl md:text-3xl font-bold mb-6">{productItem.title}</h1>
+                    <h1 className="xl:text-3xl md:text-2xl font-bold mb-0 py-4 max-sm:text-center max-sm:text-[20px]">{productItem.title}</h1>
 
                     {/* Консоль */}
-                    <div className="mb-6">
-                      <p className="font-semibold mb-2">Консоль</p>
-                      <div className="flex flex-wrap gap-2">
+                    <div className="mb-4">
+                      <p className="font-semibold mb-2 max-sm:text-center">Консоль</p>
+                      <div className="flex flex-wrap gap-2 max-sm:justify-center">
                         {productItem.consoles.map((btn) => (
                           <button
                             key={btn}
@@ -147,9 +152,9 @@ export default function Hero({ productItem }) {
                     </div>
 
                     {/* Варианты покупки */}
-                    <div className="mb-8">
-                      <p className="font-semibold mb-2">Варианты покупки</p>
-                      <div className="flex flex-wrap gap-2">
+                    <div className="mb-4">
+                      <p className="font-semibold mb-2 max-sm:text-center">Варианты покупки</p>
+                      <div className="flex flex-wrap gap-2 max-sm:justify-center">
                         {["без активации", "с активацией"].map((btn) => (
                           <button
                             key={btn}
@@ -210,7 +215,7 @@ export default function Hero({ productItem }) {
                 </div>
 
                 {/* Табы */}
-                <div className="mt-6">
+                <div className="">
                   <div className="flex flex-wrap gap-3">
                     {[
                       { key: "about", label: "Об игре" },

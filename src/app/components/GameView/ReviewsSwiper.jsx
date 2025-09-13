@@ -53,7 +53,8 @@ export default function ReviewsSwiper() {
   ];
 
   return (
-    <div className="main-container text-primary px-[100px] max-lg:px-[15px] my-[50px] max-lg:[30px]">
+    <div className="max-w-[1400px] mx-auto relative">
+    <div className="main-container text-primary  my-[50px] max-lg:[30px]">
       <div className="flex justify-between items-center max-w-[1140px] mx-auto px-4 md:px-8 mb-8">
         <button className="swiper-button-prev-custom text-[#1e1f5e]">
           <FaArrowLeft size={22} />
@@ -66,7 +67,7 @@ export default function ReviewsSwiper() {
         </button>
       </div>
 
-      <div className="relative overflow-visible px-4 md:px-[30px] w-[95%] mx-auto">
+      <div className="relative overflow-visible w-[100%] mx-auto">
         <Swiper
           modules={[Navigation]}
           navigation={{
@@ -116,6 +117,7 @@ export default function ReviewsSwiper() {
           ))}
         </Swiper>
       </div>
+    </div>
     </div>
   );
 }

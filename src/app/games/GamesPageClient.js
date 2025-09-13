@@ -32,7 +32,7 @@ export default function GamesPage() {
       <div className="mt-6">
         {activeTab === "Главная" && <Main />}
         {activeTab === "Все игры" && <div className="px-6"><AllGames /></div>}
-        {activeTab === "Скидки" && <Sales />}
+        {activeTab === "Скидки" && <div className="px-6"><Sales /></div>}
       </div>
     </div>
   );
