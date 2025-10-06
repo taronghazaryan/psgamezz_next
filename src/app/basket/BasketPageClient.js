@@ -29,6 +29,14 @@ const BasketPageClient = () => {
     setIsModalOpen(true);
   };
 
+  const redirectToPayment = (url) => {
+  const form = document.createElement("form");
+    form.method = "POST";
+    form.action = url;
+    document.body.appendChild(form);
+    form.submit();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -50,7 +58,8 @@ const BasketPageClient = () => {
       if (!data.payment_url) throw new Error("Нет ссылки для оплаты");
 
       setIsModalOpen(false);
-      window.location.href = data.payment_url;
+      redirectToPayment(data.payment_url);
+      
     } catch (e) {
       setError(e.response?.data?.message || e.message || "Ошибка запроса");
       setLoading(false);

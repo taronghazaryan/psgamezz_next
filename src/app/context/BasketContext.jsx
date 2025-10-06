@@ -53,6 +53,8 @@ export const BasketProvider = ({ children }) => {
     );
   };
 
+  const clearBasket = () => setBasket([]);
+
   const toggleAll = (checked) => {
     setBasket((prev) => prev.map((item) => ({ ...item, checked })));
   };
@@ -81,6 +83,7 @@ export const BasketProvider = ({ children }) => {
         toggleItemCheck,
         toggleAll,
         changeQuantity,
+        clearBasket,
       }}
     >
       {children}
