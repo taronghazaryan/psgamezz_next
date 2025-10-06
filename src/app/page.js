@@ -1,68 +1,28 @@
-'use client';
+export const metadata = {
+  title: "Купить игры и подписки PS Plus, EA Play — PSGamezz",
+  description:
+    "Купить игры и подписки для PS4 и PS5 в России. PS Plus, EA Play и другие популярные игры. Самые низкие цены, онлайн покупка, безопасная оплата на PSGamezz.",
+  keywords:
+    "ps plus, ea play, ps4 игры, ps5 игры, подписки на playstation, игры на PS4 и PS5, онлайн покупка, PSGamezz",
+  openGraph: {
+    url: "https://psgamezz.ru/",
+    title: "Купить игры и подписки PS Plus, EA Play — PSGamezz",
+    description:
+      "Купить игры и подписки для PS4 и PS5 в России. PS Plus, EA Play и другие популярные игры. Самые низкие цены, онлайн покупка, безопасная оплата на PSGamezz.",
+    images: [
+      {
+        url: "/logo/1.png",
+        width: 1200,
+        height: 630,
+        alt: "PSGamezz — Игры и подписки для PlayStation",
+      },
+    ],
+  },
+};
 
-import { useEffect, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useBasket } from './context/BasketContext';
-import Hero from './components/Hero';
-import Section2 from './components/Section2';
-import Section3 from './components/Section3';
-import PaymentHandler from './components/PaymentHandler';
-import SuccessModal from './components/SuccessModal';
-import FailModal from './components/FailModal';
+
+import HomepageClient from './HomePageClient';
 
 export default function HomePage() {
-  const router = useRouter();
-  const { clearBasket } = useBasket();
-
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showFailModal, setShowFailModal] = useState(false);
-
-  // Чтение query из URL один раз при монтировании
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const payment = params.get('payment');
-
-    if (payment === 'success') {
-      setShowSuccessModal(true);
-      clearBasket();
-      // очищаем query, чтобы повторный рендер не открывал снова
-      const url = new URL(window.location);
-      url.searchParams.delete('payment');
-      window.history.replaceState({}, '', url);
-    } else if (payment === 'failed') {
-      setShowFailModal(true);
-    }
-  }, [clearBasket]);
-
-  // Блокировка скролла при открытой модалке
-  useEffect(() => {
-    document.body.style.overflow = showSuccessModal || showFailModal ? 'hidden' : 'auto';
-  }, [showSuccessModal, showFailModal]);
-
-  const handleCloseModal = () => {
-    setShowSuccessModal(false);
-    setShowFailModal(false);
-    router.replace('/');
-  };
-
-  return (
-    <div className="relative">
-      <Hero />
-      <div className="px-4">
-        <Section2 />
-        <Section3 />
-      </div>
-
-      <PaymentHandler
-        onSuccess={() => {
-          setShowSuccessModal(true);
-          clearBasket();
-        }}
-        onFail={() => setShowFailModal(true)}
-      />
-
-      {showSuccessModal && <SuccessModal onClose={handleCloseModal} />}
-      {showFailModal && <FailModal onClose={handleCloseModal} />}
-    </div>
-  );
+  return <HomepageClient />;
 }
