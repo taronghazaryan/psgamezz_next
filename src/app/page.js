@@ -18,17 +18,21 @@ export default function HomePage() {
   const [showFailModal, setShowFailModal] = useState(false);
 
   // Чтение query из URL один раз при монтировании
-useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  const payment = params.get('payment');
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const payment = params.get('payment');
 
-  if (payment === 'success') {
-    setShowSuccessModal(true);
-    clearBasket();
-  } else if (payment === 'failed') {
-    setShowFailModal(true);
-  }
-}, [clearBasket]); // <- пустой массив, не включаем функции и объекты
+    if (payment === 'success') {
+      setShowSuccessModal(true);
+      clearBasket();
+      // очищаем query, чтобы повторный рендер не открывал снова
+      const url = new URL(window.location);
+      url.searchParams.delete('payment');
+      window.history.replaceState({}, '', url);
+    } else if (payment === 'failed') {
+      setShowFailModal(true);
+    }
+  }, [clearBasket]);
 
   // Блокировка скролла при открытой модалке
   useEffect(() => {
