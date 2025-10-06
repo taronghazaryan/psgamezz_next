@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useBasket } from './context/BasketContext';
 import Hero from './components/Hero';
 import Section2 from './components/Section2';
@@ -11,21 +11,34 @@ import SuccessModal from './components/SuccessModal';
 import FailModal from './components/FailModal';
 
 export default function HomePage() {
+  const router = useRouter();
+  const { clearBasket } = useBasket();
+
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailModal, setShowFailModal] = useState(false);
-  const { clearBasket } = useBasket();
-  const router = useRouter();
 
-  // Только на клиенте
-  const searchParams = typeof window !== "undefined" ? useSearchParams() : null;
+  // Чтение query из URL один раз при монтировании
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const payment = params.get('payment');
 
-  const handlePaymentSuccess = () => {
+  if (payment === 'success') {
     setShowSuccessModal(true);
     clearBasket();
-  };
-
-  const handlePaymentFail = () => {
+  } else if (payment === 'failed') {
     setShowFailModal(true);
+  }
+}, [clearBasket]); // <- пустой массив, не включаем функции и объекты
+
+  // Блокировка скролла при открытой модалке
+  useEffect(() => {
+    document.body.style.overflow = showSuccessModal || showFailModal ? 'hidden' : 'auto';
+  }, [showSuccessModal, showFailModal]);
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
+    setShowFailModal(false);
+    router.replace('/');
   };
 
   return (
@@ -36,17 +49,16 @@ export default function HomePage() {
         <Section3 />
       </div>
 
-      {/* PaymentHandler только если searchParams есть */}
-      {searchParams && (
-        <PaymentHandler
-          searchParams={searchParams}
-          onSuccess={handlePaymentSuccess}
-          onFail={handlePaymentFail}
-        />
-      )}
+      <PaymentHandler
+        onSuccess={() => {
+          setShowSuccessModal(true);
+          clearBasket();
+        }}
+        onFail={() => setShowFailModal(true)}
+      />
 
-      {showSuccessModal && <SuccessModal onClose={() => setShowSuccessModal(false)} />}
-      {showFailModal && <FailModal onClose={() => setShowFailModal(false)} />}
+      {showSuccessModal && <SuccessModal onClose={handleCloseModal} />}
+      {showFailModal && <FailModal onClose={handleCloseModal} />}
     </div>
   );
 }

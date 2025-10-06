@@ -2,17 +2,15 @@
 
 import { useEffect } from 'react';
 
-export default function PaymentHandler({ onSuccess, onFail, searchParams }) {
+export default function PaymentHandler({ onSuccess, onFail }) {
   useEffect(() => {
-    const query = searchParams.get('payment'); // читаем один раз
-    if (query === 'success') {
-      onSuccess?.();
-    } else if (query === 'failed') {
-      onFail?.();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // пустой массив зависимостей! больше не ставим searchParams
-  // onSuccess и onFail стабильные функции, поэтому ок
+    if (typeof window === 'undefined') return;
 
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('payment'); // читаем один раз при монтировании
+
+    if (query === 'success') onSuccess?.();
+    if (query === 'failed') onFail?.();
+  }, []); // пустой массив зависимостей
   return null;
 }
